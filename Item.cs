@@ -10,7 +10,7 @@ namespace KnapSack {
         public int profit;
         public int weight;
 
-        //Constructor
+        //Constructor.
         public Item(int profit, int weight) {
             this.profit = profit;
             this.weight = weight;
