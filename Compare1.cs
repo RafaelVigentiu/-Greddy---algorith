@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace KnapSack {
+    //Comparison function to sort Item according
     public class Compare1 : IComparer {
         static void Main(string[] args) {
             int weight = 50;
@@ -26,22 +27,29 @@ namespace KnapSack {
 
         static double FracKnapSack(Item[] items, int weight) {
             Compare1 obj = new Compare1();
+
+            //Sort Items based by Compare(Object x, Object y) from IComparer.
             Array.Sort(items, obj);
-            double totalVal = 0f;
-            int curretWeight = 0;
+            double totalVal = 0f; //Initialize max profit.
+            int curretWeight = 0; //Initialize current weignt.
 
             foreach (Item item in items) {
-                float remaining = weight - curretWeight;
+                float remaining = weight - curretWeight; //Remaining weight.
 
+                //Check if current Item weight <= remaining.
                 if (item.weight <= remaining) {
-                    totalVal += (double)item.profit;
-                    curretWeight += item.weight;
+                    totalVal += (double)item.profit; //Add profit.
+                    curretWeight += item.weight; //Update Wight.
 
                 } else {
-                    if (remaining == 0) break;
+                    if (remaining == 0) break; //Stop program if there no more space.
 
-                    double fraction = remaining / item.weight;
+
+                    // Calculate the fraction of the item that can be taken based on the remaining capacity
+                    double fraction = remaining / item.weight; 
+                    //Update profit.
                     totalVal += fraction * item.profit;
+                    // Update the current weight by adding the fractional part of the item's weight
                     curretWeight += (int)(fraction * (double)item.weight);
                 }
             }
