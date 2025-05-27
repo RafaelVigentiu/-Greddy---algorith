@@ -31,7 +31,7 @@ namespace KnapSack {
             //Sort Items based by Compare(Object x, Object y) from IComparer.
             Array.Sort(items, obj);
             double totalVal = 0f; //Initialize max profit.
-            int curretWeight = 0; //Initialize current weignt.
+            int curretWeight = 0; //Initialize current weight.
 
             foreach (Item item in items) {
                 float remaining = weight - curretWeight; //Remaining weight.
@@ -39,17 +39,17 @@ namespace KnapSack {
                 //Check if current Item weight <= remaining.
                 if (item.weight <= remaining) {
                     totalVal += (double)item.profit; //Add profit.
-                    curretWeight += item.weight; //Update Wight.
+                    curretWeight += item.weight; //Update Weight.
 
                 } else {
-                    if (remaining == 0) break; //Stop program if there no more space.
+                    if (remaining == 0) break; //Stop the program if there no more space.
 
 
-                    // Calculate the fraction of the item that can be taken based on the remaining capacity
+                    // Calculate the fraction of the item that can be taken based on the remaining capacity.
                     double fraction = remaining / item.weight; 
                     //Update profit.
                     totalVal += fraction * item.profit;
-                    // Update the current weight by adding the fractional part of the item's weight
+                    // Update the current weight by adding the fractional part of the item's weight.
                     curretWeight += (int)(fraction * (double)item.weight);
                 }
             }
